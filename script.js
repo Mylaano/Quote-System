@@ -64,24 +64,26 @@ function showQuote() {
 
 // Evenements
 
-arrowLeft.addEventListener('click', () => {
-    quoteIndex--;
-
-    if(quoteIndex < 0) {
-        quoteIndex = quotes.length-1;
-    }
-
-    showQuote();
-})
-
-arrowRight.addEventListener('click', () => {
-    quoteIndex++;
-
-    if(quoteIndex >= quotes.length) {
-        quoteIndex = 0;
-    }
-
-    showQuote();
+// Ajoute une classe sur les deux flèches et un data-direction (left/right)
+// Fait un foreach pour parcourir les deux éléments
+// passe une condition
+const arrow = document.querySelectorAll('.arrow')
+arrow.forEach(item => {
+    item.addEventListener('click', e => {
+        switch(e.target.dataset.direction){
+            case "left":
+                quoteIndex--;
+                if(quoteIndex < 0) 
+                    quoteIndex = quotes.length-1;
+            break;
+            case "right":
+                quoteIndex++;
+                if(quoteIndex >= quotes.length)
+                    quoteIndex = 0;
+            break; 
+        }
+        showQuote();
+    })
 })
 
 randomQuote.addEventListener('click', () => {
